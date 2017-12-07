@@ -14,27 +14,26 @@ public class Event {
         return endVar;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
     private String id;
-    private String alias;
     private String begVar;
     private String endVar;
 
-    public Event(String id) {
+    public Event(String id, String begVar, String endVar) {
         this.id= id;
-        this.alias = "int_" + id.hashCode();
-        this.begVar = alias + "-";
-        this.endVar = alias + "+";
+        this.begVar = begVar;
+        this.endVar = endVar;
+    }
+
+    public Event(String id, TimeInterval interval) {
+        this.id= id;
+        this.begVar = interval.getBegVar();
+        this.endVar = interval.getEndVar();
     }
 
     @Override
     public String toString() {
         return "Event{" +
                 "id='" + id + '\'' +
-                ", alias='" + alias + '\'' +
                 ", begVar='" + begVar + '\'' +
                 ", endVar='" + endVar + '\'' +
                 '}';

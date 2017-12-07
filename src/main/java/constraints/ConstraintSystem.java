@@ -1,5 +1,6 @@
 package constraints;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class ConstraintSystem {
@@ -13,7 +14,15 @@ public class ConstraintSystem {
     }
 
     private Set<LinearConstraint> constraints;
+
     private Set<String> vars;
+
+    public ConstraintSystem() {
+
+        this.constraints = new HashSet<>();
+        this.vars = new HashSet<>();
+
+    }
 
     @Override
     public String toString() {
