@@ -7,14 +7,14 @@ import java.util.Set;
 
 import static ontology.OntologyVocabulary.*;
 
-public class ProblemSpecification {
+public class TCSProblem {
 
     private ConstraintSystem constraintSystem;
     private Ontology ontology;
     private TemporalDataConverter converter;
 
 
-    public ProblemSpecification(Set<Assertion> input, int precision) {
+    public TCSProblem(Set<Assertion> input, int precision) {
 
         this.constraintSystem = new ConstraintSystem();
         this.ontology = new Ontology();
