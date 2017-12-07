@@ -74,7 +74,7 @@ public class Ontology {
                 "events=" + events +
                 ", instants=" + instants +
                 ", intervals=" + intervals +
-                 ", eventVars=" + eventVars +
+                ", eventVars=" + eventVars +
                 '}';
     }
 }

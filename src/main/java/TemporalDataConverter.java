@@ -18,10 +18,10 @@ public class TemporalDataConverter {
 
     int precisionFactor;
 
-    public TemporalDataConverter(int precision) {
+    public TemporalDataConverter(int precision) { this.precisionFactor = getFactor(precision); }
 
-        this.precisionFactor = getFactor(precision);
-
+    public TemporalDataConverter() {
+        this.precisionFactor = getFactor(3);
     }
 
     private int getFactor(int precision) {
@@ -48,11 +48,7 @@ public class TemporalDataConverter {
             }
         }
     }
-
-    public TemporalDataConverter() {
-        this.precisionFactor = getFactor(3);
-    }
-
+    
 
     // this method might return slightly different results depending on the current time
 
@@ -70,7 +66,7 @@ public class TemporalDataConverter {
 
         //e.g. "2017"
 
-        DateTime date = DateTime.parse(xsdYear + "01-01", ISODateTimeFormat.date());
+        DateTime date = DateTime.parse(xsdYear + "-01-01", ISODateTimeFormat.date());
 
         return date.getMillis() / precisionFactor;
 
@@ -80,7 +76,7 @@ public class TemporalDataConverter {
 
         //e.g. "2017"
 
-        DateTime date = DateTime.parse(xsdYear + "01-01", ISODateTimeFormat.date());
+        DateTime date = DateTime.parse(xsdYear + "-01-01", ISODateTimeFormat.date());
 
         return date.plusYears(1).getMillis() / precisionFactor;
 
@@ -128,7 +124,7 @@ public class TemporalDataConverter {
 
     public long getDateTimeBeginning(String xsdDateTime) {
 
-        //e.g. "2002-10-10T12:00:00-05:00"
+        //e.g. "2002-10-10T12:00:00-05:00" or "2002-10-10T12:00:00"
 
         DateTime dateTime = DateTime.parse(xsdDateTime, ISODateTimeFormat.dateTimeParser());
 
@@ -138,7 +134,7 @@ public class TemporalDataConverter {
 
     public long getDateTimeEnd(String xsdDateTime) {
 
-        //e.g. "2002-10-10T12:00:00-05:00"
+        //e.g. "2002-10-10T12:00:00-05:00" or "2002-10-10T12:00:00"
 
         DateTime dateTime = DateTime.parse(xsdDateTime, ISODateTimeFormat.dateTimeParser());
 
