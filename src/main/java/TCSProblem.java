@@ -78,6 +78,9 @@ public class TCSProblem {
                 extract_TIME_AFTER(assertion);
                 break;
             }
+            default: {
+                return;
+            }
 
 
         }
