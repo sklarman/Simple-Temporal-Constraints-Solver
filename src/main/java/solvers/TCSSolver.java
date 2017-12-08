@@ -1,11 +1,13 @@
+package solvers;
+
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.exception.ContradictionException;
 import org.chocosolver.solver.variables.IntVar;
 
-public class TCSSolver {
+public abstract class TCSSolver {
 
-    public void chocoSolver() {
+ //   public void chocoSolver() {
 
 //            System.out.println("ChocoSolver test");
 //
@@ -28,5 +30,5 @@ public class TCSSolver {
 //                e.printStackTrace();
 //            }
 
-    }
+  //  }
 }

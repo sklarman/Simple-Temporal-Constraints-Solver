@@ -2,7 +2,6 @@ import constraints.ConstraintSystem;
 import ontology.*;
 
 import java.util.List;
-import java.util.Set;
 
 import static constraints.ConstraintVocabulary.EQ;
 import static constraints.ConstraintVocabulary.LEQ;

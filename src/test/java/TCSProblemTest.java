@@ -37,4 +37,19 @@ class TCSProblemTest {
 
     }
 
+
+    @Test
+    public void countVarsInSystem(){
+
+
+        List<Assertion> input = new ArrayList<Assertion>() {{
+            add(new Assertion("http://test/interval1","http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
+            add(new Assertion("http://test/event2","http://granthika.co/grantha/story#inTime", "http://test/interval3"));
+        }};
+
+        TCSProblem problem = new TCSProblem(input);
+
+        assertEquals(6, problem.getConstraintSystem().getVars().size());
+    }
+
 }
