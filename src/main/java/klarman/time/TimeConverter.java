@@ -1,10 +1,12 @@
+package klarman.time;
+
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.ISODateTimeFormat;
 import org.joda.time.format.ISOPeriodFormat;
 
-public class TemporalDataConverter {
+public class TimeConverter {
 
     /*
 
@@ -19,9 +21,9 @@ public class TemporalDataConverter {
 
     private int precisionFactor;
 
-    public TemporalDataConverter(int precision) { this.precisionFactor = getFactor(precision); }
+    public TimeConverter(int precision) { this.precisionFactor = getFactor(precision); }
 
-    public TemporalDataConverter() {
+    public TimeConverter() {
         this.precisionFactor = getFactor(3);
     }
 
@@ -55,7 +57,7 @@ public class TemporalDataConverter {
     }
     
 
-    // this method might return slightly different results depending on the current time
+    // this method might return slightly different results depending on the current klarman.time
 
     public long getDuration(String xsdDuration) {
 

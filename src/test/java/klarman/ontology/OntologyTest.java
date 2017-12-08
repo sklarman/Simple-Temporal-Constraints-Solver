@@ -1,4 +1,4 @@
-package ontology;
+package klarman.ontology;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
-package constraints;
+package klarman.constraints;
 
 import org.junit.jupiter.api.Test;
 
-import static constraints.ConstraintVocabulary.LEQ;
+import static klarman.constraints.ConstraintVocabulary.LEQ;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinearConstraintTest {

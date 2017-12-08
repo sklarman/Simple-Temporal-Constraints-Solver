@@ -1,10 +1,8 @@
-import ontology.Assertion;
+import klarman.ontology.Assertion;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TCSProblemTest {
 
@@ -13,18 +11,18 @@ class TCSProblemTest {
 
 
         List<Assertion> input = new ArrayList<Assertion>() {{
-            add(new Assertion("http://test/interval1","http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
-            add(new Assertion("http://test/instant1","http://www.w3.org/2006/time#inXSDDate", "2017-01-01"));
-            add(new Assertion("http://test/instant2","http://www.w3.org/2006/time#inXSDDateTime", "2017-10-10T12:00:00"));
-            add(new Assertion("http://test/instant3","http://www.w3.org/2006/time#inXSDgYear", "2017"));
-            add(new Assertion("http://test/instant4","http://www.w3.org/2006/time#inXSDgYearMonth", "2017-10"));
+            add(new Assertion("http://test/interval1","http://www.w3.org/2006/klarman.time#hasXSDDuration", "P1D"));
+            add(new Assertion("http://test/instant1","http://www.w3.org/2006/klarman.time#inXSDDate", "2017-01-01"));
+            add(new Assertion("http://test/instant2","http://www.w3.org/2006/klarman.time#inXSDDateTime", "2017-10-10T12:00:00"));
+            add(new Assertion("http://test/instant3","http://www.w3.org/2006/klarman.time#inXSDgYear", "2017"));
+            add(new Assertion("http://test/instant4","http://www.w3.org/2006/klarman.time#inXSDgYearMonth", "2017-10"));
             add(new Assertion("http://test/event1","http://granthika.co/grantha/story#spansTime", "http://test/interval2"));
             add(new Assertion("http://test/event2","http://granthika.co/grantha/story#inTime", "http://test/interval3"));
-            add(new Assertion("http://test/interval4","http://www.w3.org/2006/time#intervalDuring", "http://test/interval5"));
-            add(new Assertion("http://test/interval6","http://www.w3.org/2006/time#hasBeginning", "http://test/instant5"));
-            add(new Assertion("http://test/interval7","http://www.w3.org/2006/time#hasEnd", "http://test/instant6"));
-            add(new Assertion("http://test/interval8","http://www.w3.org/2006/time#before", "http://test/interval9"));
-            add(new Assertion("http://test/interval10","http://www.w3.org/2006/time#after", "http://test/interval11"));
+            add(new Assertion("http://test/interval4","http://www.w3.org/2006/klarman.time#intervalDuring", "http://test/interval5"));
+            add(new Assertion("http://test/interval6","http://www.w3.org/2006/klarman.time#hasBeginning", "http://test/instant5"));
+            add(new Assertion("http://test/interval7","http://www.w3.org/2006/klarman.time#hasEnd", "http://test/instant6"));
+            add(new Assertion("http://test/interval8","http://www.w3.org/2006/klarman.time#before", "http://test/interval9"));
+            add(new Assertion("http://test/interval10","http://www.w3.org/2006/klarman.time#after", "http://test/interval11"));
         }};
 
         TCSProblem problem = new TCSProblem(input);
@@ -43,7 +41,7 @@ class TCSProblemTest {
 
 
         List<Assertion> input = new ArrayList<Assertion>() {{
-            add(new Assertion("http://test/interval1","http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
+            add(new Assertion("http://test/interval1","http://www.w3.org/2006/klarman.time#hasXSDDuration", "P1D"));
             add(new Assertion("http://test/event2","http://granthika.co/grantha/story#inTime", "http://test/interval3"));
         }};
 

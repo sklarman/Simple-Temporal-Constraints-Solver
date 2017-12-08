@@ -1,17 +1,20 @@
-import constraints.ConstraintSystem;
-import ontology.*;
+package klarman;
+
+import klarman.constraints.ConstraintSystem;
+import klarman.ontology.*;
+import klarman.time.TimeConverter;
 
 import java.util.List;
 
-import static constraints.ConstraintVocabulary.EQ;
-import static constraints.ConstraintVocabulary.LEQ;
-import static ontology.OntologyVocabulary.*;
+import static klarman.constraints.ConstraintVocabulary.EQ;
+import static klarman.constraints.ConstraintVocabulary.LEQ;
+import static klarman.ontology.OntologyVocabulary.*;
 
 public class TCSProblem {
 
     private ConstraintSystem constraintSystem;
     private Ontology ontology;
-    private TemporalDataConverter converter;
+    private TimeConverter converter;
     private List<Assertion> input;
 
     public ConstraintSystem getConstraintSystem() {
@@ -24,13 +27,13 @@ public class TCSProblem {
 
     public TCSProblem(List<Assertion> input) {
 
-        this.converter = new TemporalDataConverter();
+        this.converter = new TimeConverter();
         constructProblem(input);
     }
 
     public TCSProblem(List<Assertion> input, int precision) {
 
-        this.converter = new TemporalDataConverter(precision);
+        this.converter = new TimeConverter(precision);
         constructProblem(input);
 
     }

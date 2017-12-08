@@ -1,10 +1,9 @@
-package constraints;
+package klarman.constraints;
 
-import ontology.TimeInstant;
-import ontology.TimeInterval;
+import klarman.ontology.TimeInterval;
 import org.junit.jupiter.api.Test;
 
-import static constraints.ConstraintVocabulary.LEQ;
+import static klarman.constraints.ConstraintVocabulary.LEQ;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConstraintSystemTest {
