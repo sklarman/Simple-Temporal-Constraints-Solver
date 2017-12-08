@@ -30,7 +30,7 @@ public class TimeInstant {
                 "id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
                 ", var='" + var + '\'' +
-                '}';
+                "}\n";
     }
 
 }

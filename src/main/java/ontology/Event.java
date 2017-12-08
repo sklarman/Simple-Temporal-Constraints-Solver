@@ -36,6 +36,6 @@ public class Event {
                 "id='" + id + '\'' +
                 ", begVar='" + begVar + '\'' +
                 ", endVar='" + endVar + '\'' +
-                '}';
+                "}\n";
     }
 }

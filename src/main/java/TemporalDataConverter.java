@@ -12,11 +12,12 @@ public class TemporalDataConverter {
     0) milliseconds
     1) seconds
     2) minutes
-    3) hours
+    3) hours (default)
+    4) days
 
     */
 
-    int precisionFactor;
+    private int precisionFactor;
 
     public TemporalDataConverter(int precision) { this.precisionFactor = getFactor(precision); }
 
@@ -29,6 +30,7 @@ public class TemporalDataConverter {
         int secs = 1000;
         int mins = 60;
         int hrs = 60;
+        int days = 24;
 
         switch (precision) {
             case 0: {
@@ -42,6 +44,9 @@ public class TemporalDataConverter {
             }
             case 3: {
                 return secs * mins * hrs;
+            }
+            case 4: {
+                return secs * mins * hrs * days;
             }
             default: {
                 return secs * mins * hrs;

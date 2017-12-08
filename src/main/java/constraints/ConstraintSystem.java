@@ -1,7 +1,11 @@
 package constraints;
 
+import ontology.TimeInterval;
+
 import java.util.HashSet;
 import java.util.Set;
+
+import static constraints.ConstraintVocabulary.LEQ;
 
 public class ConstraintSystem {
 
@@ -24,11 +28,33 @@ public class ConstraintSystem {
 
     }
 
+    public void addConstraint(String lvar, long lconst, String operator, String rvar, long rconst) {
+        ConstraintExpression lhs = new ConstraintExpression(lvar, lconst);
+        ConstraintExpression rhs = new ConstraintExpression(rvar, rconst);
+        LinearConstraint constraint = new LinearConstraint(lhs, operator, rhs);
+
+        for (LinearConstraint existingConstraint : constraints) {
+            if (    existingConstraint.getLhs().getVariable().equals(lvar) &&
+                    existingConstraint.getRhs().getVariable().equals(rvar) &&
+                    existingConstraint.getLhs().getConstant()==lconst &&
+                    existingConstraint.getRhs().getConstant()==rconst) {
+                return;
+            } else {
+                this.constraints.add(constraint);
+            }
+        }
+    }
+
+    public void addInterval(TimeInterval interval) {
+        addConstraint(interval.getBegVar(), 0, LEQ, interval.getEndVar(), 0);
+    }
+
     @Override
     public String toString() {
-        return "constraints.ConstraintSystem{" +
-                "constraints=" + constraints.toString() +
-                ", vars=" + vars +
-                '}';
+        String output = "";
+        for (LinearConstraint constriant : constraints) {
+            output += constriant.toString() + "\n";
+        }
+        return output;
     }
 }

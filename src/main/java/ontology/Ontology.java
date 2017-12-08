@@ -1,9 +1,6 @@
 package ontology;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Ontology {
 
@@ -56,6 +53,17 @@ public class Ontology {
         }
     }
 
+    public TimeInterval addInterval() {
+        String newId = "http://interval/" + UUID.randomUUID();
+        if (intervals.containsKey(newId)) {
+            return intervals.get(newId);
+        } else {
+            TimeInterval interval = new TimeInterval(newId);
+            intervals.put(newId, interval);
+            return interval;
+        }
+    }
+
     public Event addEvent(String id, TimeInterval interval) {
         if (events.containsKey(id)) {
             return events.get(id);
@@ -70,11 +78,16 @@ public class Ontology {
 
     @Override
     public String toString() {
-        return "Ontology{" +
-                "events=" + events +
-                ", instants=" + instants +
-                ", intervals=" + intervals +
-                ", eventVars=" + eventVars +
-                '}';
+        String output = "";
+        for (Event event : events.values()) {
+            output += event.toString();
+        }
+        for (TimeInterval interval : intervals.values()) {
+            output += interval.toString();
+        }
+        for (TimeInstant instant : instants.values()) {
+            output += instant.toString();
+        }
+        return output;
     }
 }

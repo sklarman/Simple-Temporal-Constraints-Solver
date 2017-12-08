@@ -37,6 +37,6 @@ public class TimeInterval {
                 ", alias='" + alias + '\'' +
                 ", begVar='" + begVar + '\'' +
                 ", endVar='" + endVar + '\'' +
-                '}';
+                "}\n";
     }
 }

@@ -26,10 +26,6 @@ public class Assertion {
 
     @Override
     public String toString() {
-        return "ontology.Assertion{" +
-                "subject='" + subject + '\'' +
-                ", predicate='" + predicate + '\'' +
-                ", object='" + object + '\'' +
-                '}';
+        return "(" + subject + ", " + predicate + ", " + object + ")";
     }
 }

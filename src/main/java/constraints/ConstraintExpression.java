@@ -6,23 +6,22 @@ public class ConstraintExpression {
         return variable;
     }
 
-    public Integer getConstant() {
+    public long getConstant() {
         return constant;
     }
 
     private String variable;
-    private Integer constant;
+    private long constant;
 
-    public ConstraintExpression(String variable, Integer constant) {
+    //TO BE READ AS: "variable + constant"
+
+    public ConstraintExpression(String variable, long constant) {
         this.variable = variable;
         this.constant = constant;
     }
 
     @Override
     public String toString() {
-        return "constraints.ConstraintExpression{" +
-                "variable='" + variable + '\'' +
-                ", constant=" + constant +
-                '}';
+        return variable + " + " + constant;
     }
 }

@@ -18,7 +18,10 @@ public class LinearConstraint {
     private ConstraintExpression rhs;
     private String operator;
 
-    public LinearConstraint(ConstraintExpression lhs, ConstraintExpression rhs, String operator) {
+    //TO BE READ AS: "(lhs) operator (rhs)"
+
+
+    public LinearConstraint(ConstraintExpression lhs, String operator, ConstraintExpression rhs) {
         this.lhs = lhs;
         this.rhs = rhs;
         this.operator = operator;
@@ -26,10 +29,6 @@ public class LinearConstraint {
 
     @Override
     public String toString() {
-        return "constraints.LinearConstraint{" +
-                "lhs=" + lhs +
-                ", rhs=" + rhs +
-                ", operator='" + operator + '\'' +
-                '}';
+        return lhs.toString() + " " + operator + " " + rhs.toString();
     }
 }
