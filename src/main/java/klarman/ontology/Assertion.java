@@ -1,4 +1,4 @@
-package ontology;
+package klarman.ontology;
 
 public class Assertion {
 

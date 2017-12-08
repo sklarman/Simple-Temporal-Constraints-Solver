@@ -1,10 +1,10 @@
-package constraints;
+package klarman.constraints;
 
-import ontology.TimeInterval;
+import klarman.ontology.TimeInterval;
 import java.util.HashSet;
 import java.util.Set;
 
-import static constraints.ConstraintVocabulary.LEQ;
+import static klarman.constraints.ConstraintVocabulary.LEQ;
 
 public class ConstraintSystem {
 

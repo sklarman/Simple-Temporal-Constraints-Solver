@@ -1,4 +1,4 @@
-package constraints;
+package klarman.constraints;
 
 public class LinearConstraint {
 
