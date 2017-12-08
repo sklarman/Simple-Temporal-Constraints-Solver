@@ -26,7 +26,7 @@ public class TimeInstant {
 
     @Override
     public String toString() {
-        return "ontology.TimeInterval{" +
+        return "TimeInterval{" +
                 "id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
                 ", var='" + var + '\'' +

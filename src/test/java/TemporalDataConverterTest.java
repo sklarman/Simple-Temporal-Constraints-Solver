@@ -121,8 +121,6 @@ class TemporalDataConverterTest {
 
     }
 
-
-
     @Test
     public void differenceBetweenBeginningAndEndOfDateTimeNoTimeZone() {
 

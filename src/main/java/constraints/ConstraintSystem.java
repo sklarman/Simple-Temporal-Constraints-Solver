@@ -2,6 +2,7 @@ package constraints;
 
 import ontology.TimeInterval;
 
+import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,10 +40,10 @@ public class ConstraintSystem {
                     existingConstraint.getLhs().getConstant()==lconst &&
                     existingConstraint.getRhs().getConstant()==rconst) {
                 return;
-            } else {
-                this.constraints.add(constraint);
             }
         }
+
+        this.constraints.add(constraint);
     }
 
     public void addInterval(TimeInterval interval) {

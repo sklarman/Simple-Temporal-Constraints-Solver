@@ -22,6 +22,12 @@ public class ConstraintExpression {
 
     @Override
     public String toString() {
+        if (variable.equals("")) {
+            return String.valueOf(constant);
+        }
+        if (constant == 0) {
+            return variable ;
+        }
         return variable + " + " + constant;
     }
 }

@@ -1,6 +1,6 @@
 package ontology;
 
-public class OntologyVocabulary {
+public final class OntologyVocabulary {
 
     public static final String TIME_XSD_DURATION = "http://www.w3.org/2006/time#hasXSDDuration";
     public static final String TIME_XSD_DATE = "http://www.w3.org/2006/time#inXSDDate";

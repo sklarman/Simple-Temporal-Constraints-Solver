@@ -1,6 +1,7 @@
 import constraints.ConstraintSystem;
 import ontology.*;
 
+import java.util.List;
 import java.util.Set;
 
 import static constraints.ConstraintVocabulary.EQ;
@@ -12,7 +13,7 @@ public class TCSProblem {
     private ConstraintSystem constraintSystem;
     private Ontology ontology;
     private TemporalDataConverter converter;
-    private Set<Assertion> input;
+    private List<Assertion> input;
 
     public ConstraintSystem getConstraintSystem() {
         return constraintSystem;
@@ -22,28 +23,28 @@ public class TCSProblem {
         return ontology;
     }
 
-    public TCSProblem(Set<Assertion> input) {
+    public TCSProblem(List<Assertion> input) {
 
         this.converter = new TemporalDataConverter();
-
         constructProblem(input);
     }
 
-    public TCSProblem(Set<Assertion> input, int precision) {
+    public TCSProblem(List<Assertion> input, int precision) {
 
         this.converter = new TemporalDataConverter(precision);
+        constructProblem(input);
 
     }
 
-    private void constructProblem(Set<Assertion> input) {
+    private void constructProblem(List<Assertion> input) {
 
         this.constraintSystem = new ConstraintSystem();
         this.ontology = new Ontology();
         this.input = input;
 
-        for (Assertion assertion : input) {
-            extractInformation(assertion);
-            input.remove(input);
+        while (!input.isEmpty()) {
+            extractInformation(input.get(0));
+            input.remove(0);
         }
 
     }
@@ -117,41 +118,41 @@ public class TCSProblem {
         long beginning = converter.getYearBeginning(year);
         long end = converter.getYearEnd(year);
 
-        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, null, end);
-        constraintSystem.addConstraint(null, beginning, LEQ, instant.getVar(), 0);
+        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, "", end);
+        constraintSystem.addConstraint("", beginning, LEQ, instant.getVar(), 0);
     }
 
     private void extract_TIME_XSD_YEAR_MONTH(Assertion assertion) {
         TimeInstant instant = ontology.addInstant(assertion.getSubject());
         String yearMonth = assertion.getObject();
 
-        long beginning = converter.getYearBeginning(yearMonth);
-        long end = converter.getYearEnd(yearMonth);
+        long beginning = converter.getYearMonthBeginning(yearMonth);
+        long end = converter.getYearMonthEnd(yearMonth);
 
-        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, null, end);
-        constraintSystem.addConstraint(null, beginning, LEQ, instant.getVar(), 0);
+        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, "", end);
+        constraintSystem.addConstraint("", beginning, LEQ, instant.getVar(), 0);
     }
 
     private void extract_TIME_XSD_DATE(Assertion assertion) {
         TimeInstant instant = ontology.addInstant(assertion.getSubject());
         String date = assertion.getObject();
 
-        long beginning = converter.getYearBeginning(date);
-        long end = converter.getYearEnd(date);
+        long beginning = converter.getDateBeginning(date);
+        long end = converter.getDateEnd(date);
 
-        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, null, end);
-        constraintSystem.addConstraint(null, beginning, LEQ, instant.getVar(), 0);
+        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, "", end);
+        constraintSystem.addConstraint("", beginning, LEQ, instant.getVar(), 0);
     }
 
     private void extract_TIME_XSD_DATE_TIME(Assertion assertion) {
         TimeInstant instant = ontology.addInstant(assertion.getSubject());
         String dateTime = assertion.getObject();
 
-        long beginning = converter.getYearBeginning(dateTime);
-        long end = converter.getYearEnd(dateTime);
+        long beginning = converter.getDateTimeBeginning(dateTime);
+        long end = converter.getDateTimeEnd(dateTime);
 
-        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, null, end);
-        constraintSystem.addConstraint(null, beginning, LEQ, instant.getVar(), 0);
+        constraintSystem.addConstraint(instant.getVar(), 0, LEQ, "", end);
+        constraintSystem.addConstraint("", beginning, LEQ, instant.getVar(), 0);
     }
 
     private void extract_TIME_XSD_DURATION(Assertion assertion) {
@@ -179,7 +180,7 @@ public class TCSProblem {
         constraintSystem.addInterval(interval1);
         constraintSystem.addInterval(interval2);
 
-        input.add(new Assertion(interval1.getId(), TIME_DURING, interval2.getId()));
+        input.add(input.size(), new Assertion(interval1.getId(), TIME_DURING, interval2.getId()));
     }
 
     private void extract_TIME_DURING(Assertion assertion) {

@@ -32,7 +32,7 @@ public class TimeInterval {
 
     @Override
     public String toString() {
-        return "ontology.TimeInterval{" +
+        return "TimeInterval{" +
                 "id='" + id + '\'' +
                 ", alias='" + alias + '\'' +
                 ", begVar='" + begVar + '\'' +
