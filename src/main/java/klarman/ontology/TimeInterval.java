@@ -2,11 +2,14 @@ package klarman.ontology;
 
 public class TimeInterval {
 
-    private String id;
-    private String alias;
-    private String begVar;
-    private String endVar;
+    protected String id;
+    protected String alias;
+    protected String begVar;
+    protected String endVar;
 
+    public TimeInterval() {
+    }
+    
     public String getId() {
         return id;
     }

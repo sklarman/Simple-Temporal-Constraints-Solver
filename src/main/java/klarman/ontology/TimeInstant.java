@@ -1,28 +1,10 @@
 package klarman.ontology;
 
-public class TimeInstant  {
+public class TimeInstant extends TimeInterval {
 
-    private String id;
-    private String alias;
     private String var;
 
-    public String getId() {
-        return id;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
     public String getVar() {
-        return var;
-    }
-
-    public String begVar() {
-        return var;
-    }
-
-    public String endVar() {
         return var;
     }
 
@@ -30,6 +12,8 @@ public class TimeInstant  {
         this.id = id;
         this.alias = "v" + id.hashCode();
         this.var = alias;
+        this.begVar = var;
+        this.endVar = var;
     }
 
     @Override

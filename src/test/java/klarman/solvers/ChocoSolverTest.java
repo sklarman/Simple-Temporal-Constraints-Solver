@@ -89,7 +89,6 @@ class ChocoSolverTest {
         }
 
         ChocoSolver solver = new ChocoSolver(problem.getConstraintSystem());
-
         assertTrue(!solver.consistency());
     }
 
