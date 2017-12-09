@@ -1,10 +1,10 @@
 package klarman.solvers;
 
-import klarman.TCSProblem;
+import klarman.constraints.ConstraintSystem;
 
 public abstract class TCSSolver {
 
-     TCSProblem problem = null;
+     ConstraintSystem constraintSystem = null;
 
      public abstract boolean consistency();
 

@@ -1,35 +1,66 @@
 package klarman.solvers;
 
-import klarman.TCSProblem;
+import klarman.constraints.ConstraintSystem;
+import klarman.constraints.LinearConstraint;
+import org.chocosolver.solver.Model;
+import org.chocosolver.solver.Solver;
+import org.chocosolver.solver.variables.IntVar;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class ChocoSolver extends TCSSolver {
 
+    Model model;
 
-    public ChocoSolver(TCSProblem problem) {
+    Map<String, IntVar> varMap;
 
-        this.problem = problem;
+    public ChocoSolver(ConstraintSystem constraintSystem) {
+
+        this.constraintSystem = constraintSystem;
+        this.varMap = new HashMap<>();
+
+        convertToChoco();
+
+    }
+
+    //Choco requires imposes Integer bounds on the variable values.
+    //This might lead to problems with input constants being of type long.
+
+    private void convertToChoco() {
+
+        this.model = new Model();
+
+        Set<String> vars = constraintSystem.getVars();
+
+        IntVar[] chocoVars = new IntVar[vars.size()];
+
+        int i = 0;
+
+        for (String var : vars) {
+            chocoVars[i] = model.intVar(var, IntVar.MIN_INT_BOUND, IntVar.MAX_INT_BOUND);
+            varMap.put(var, chocoVars[i]);
+            i++;
+        }
+
+
+        for (LinearConstraint constraint : constraintSystem.getConstraints()) {
+
+
+        }
+
+
+//        model.arithm(x1, "<", x2).post();
+//        model.arithm(x2, "<", x3).post();
+//        model.arithm(x3, "<", x1).post();
 
     }
 
     public boolean consistency() {
-//
-//            System.out.println("klarman.solvers.ChocoSolver test");
-//
-//            Model model = new Model( "test");
-//
-//
-//            IntVar x1 = model.intVar("x1", IntVar.MIN_INT_BOUND, IntVar.MAX_INT_BOUND);
-//            IntVar x2 = model.intVar("x2", IntVar.MIN_INT_BOUND, IntVar.MAX_INT_BOUND);
-//            IntVar x3 = model.intVar("x3", IntVar.MIN_INT_BOUND, IntVar.MAX_INT_BOUND);
-//
-//
-//            model.arithm(x1, "<", x2).post();
-//            model.arithm(x2, "<", x3).post();
-//            model.arithm(x3, "<", x1).post();
-//
-//        Solver solver =  model.getSolver();
-//
-//          return solver.solve();
-        return true;
+
+        Solver solver =  model.getSolver();
+
+        return solver.solve();
     }
 }
