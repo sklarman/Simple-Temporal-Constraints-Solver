@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static klarman.constraints.ConstraintVocabulary.EQ;
-import static klarman.constraints.ConstraintVocabulary.GEQ;
 import static klarman.constraints.ConstraintVocabulary.LEQ;
 import static klarman.ontology.OntologyVocabulary.*;
 
@@ -237,9 +236,5 @@ public class TCSProblem {
 
         constraintSystem.addConstraint(interval.getEndVar(), 0, EQ, instant.getVar(), 0);
     }
-
-
-
-
 
 }
