@@ -4,6 +4,7 @@ import klarman.constraints.ConstraintSystem;
 import klarman.ontology.*;
 import klarman.time.TimeConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static klarman.constraints.ConstraintVocabulary.EQ;
@@ -42,17 +43,22 @@ public class TCSProblem {
 
         this.constraintSystem = new ConstraintSystem();
         this.ontology = new Ontology();
-        this.input = input;
+        this.input = new ArrayList<>();
+        this.input.addAll(input);
 
         while (!input.isEmpty()) {
-            extractInformation(input.get(0));
+            try {
+                extractInformation(input.get(0));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             input.remove(0);
         }
 
     }
 
 
-    private void extractInformation(Assertion assertion) {
+    private void extractInformation(Assertion assertion) throws Exception {
 
         switch (assertion.getPredicate()) {
 
@@ -105,7 +111,7 @@ public class TCSProblem {
                 break;
             }
             default: {
-                return;
+                throw new Exception("An unsupported predicate encountered.");
             }
 
 

@@ -61,11 +61,17 @@ public class ChocoSolver extends TCSSolver {
 //            model.arithm(x, "<", y, "+", 5).post();
 //            model.arithm(x2, "<", x3).post();
 
+//            412008 <= ins_-1014269315
+//            int_-903589529- <= int_-903589529+
+//            int_-903589535- + 24 = int_-903589535+
+//            int_-903589530- = ins_-1014269313
+//            ins_-1014269317 <= 412032
 
         }
 
     }
 
+    @Override
     public boolean consistency() {
 
         Solver solver =  model.getSolver();
