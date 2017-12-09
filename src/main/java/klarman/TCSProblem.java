@@ -111,7 +111,7 @@ public class TCSProblem {
                 break;
             }
             default: {
-                throw new Exception("An unsupported predicate encountered.");
+                throw new Exception("An unsupported predicate encountered: " + assertion.toString());
             }
 
 
