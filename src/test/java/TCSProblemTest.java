@@ -28,7 +28,12 @@ class TCSProblemTest {
             add(new Assertion("http://test/interval10","http://www.w3.org/2006/time#after", "http://test/interval11"));
         }};
 
-        TCSProblem problem = new TCSProblem(input);
+        TCSProblem problem = null;
+        try {
+            problem = new TCSProblem(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println(problem.getOntology().toString());
         System.out.println();
@@ -48,7 +53,12 @@ class TCSProblemTest {
             add(new Assertion("http://test/event2","http://granthika.co/grantha/story#inTime", "http://test/interval3"));
         }};
 
-        TCSProblem problem = new TCSProblem(input);
+        TCSProblem problem = null;
+        try {
+            problem = new TCSProblem(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         assertEquals(6, problem.getConstraintSystem().getVars().size());
     }

@@ -26,20 +26,20 @@ public class TCSProblem {
         return ontology;
     }
 
-    public TCSProblem(List<Assertion> input) {
+    public TCSProblem(List<Assertion> input) throws Exception {
 
         this.converter = new TimeConverter();
         constructProblem(input);
     }
 
-    public TCSProblem(List<Assertion> input, int precision) {
+    public TCSProblem(List<Assertion> input, int precision) throws Exception {
 
         this.converter = new TimeConverter(precision);
         constructProblem(input);
 
     }
 
-    private void constructProblem(List<Assertion> input) {
+    private void constructProblem(List<Assertion> input) throws Exception {
 
         this.constraintSystem = new ConstraintSystem();
         this.ontology = new Ontology();
@@ -47,18 +47,14 @@ public class TCSProblem {
         this.input.addAll(input);
 
         while (!input.isEmpty()) {
-            try {
-                extractInformation(input.get(0));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            addAssertion(input.get(0));
             input.remove(0);
         }
 
     }
 
 
-    private void extractInformation(Assertion assertion) throws Exception {
+    public void addAssertion(Assertion assertion) throws Exception {
 
         switch (assertion.getPredicate()) {
 
