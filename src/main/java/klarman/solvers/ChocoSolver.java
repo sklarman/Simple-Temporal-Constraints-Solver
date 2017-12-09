@@ -1,7 +1,10 @@
 package klarman.solvers;
 
-import klarman.constraints.ConstraintSystem;
+import klarman.TCSProblem;
 import klarman.constraints.LinearConstraint;
+import klarman.constraints.TCSSolutionMap;
+import klarman.constraints.TCSSolution;
+import klarman.ontology.Event;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.Solver;
@@ -17,10 +20,10 @@ public class ChocoSolver extends TCSSolver {
     private Model model;
     private Map<String, IntVar> varMap;
 
-    public ChocoSolver(ConstraintSystem constraintSystem) {
+    public ChocoSolver(TCSProblem problem) {
 
-
-        this.constraintSystem = constraintSystem;
+        this.constraintSystem = problem.getConstraintSystem();
+        this.ontology = problem.getOntology();
         this.varMap = new HashMap<>();
 
         convertToChoco();
@@ -74,16 +77,29 @@ public class ChocoSolver extends TCSSolver {
 
     @Override
     public boolean consistency() {
-        
+
         Solver solver =  model.getSolver();
         solver.reset();
         return solver.solve();
     }
 
-    public Solution exampleSolution() {
+    public TCSSolutionMap findSolution() {
 
         Solver solver =  model.getSolver();
         solver.reset();
-        return solver.findSolution();
+        Solution solution = solver.findSolution();
+
+        TCSSolutionMap eventSolutions = new TCSSolutionMap();
+
+        Map<String, Event> events = ontology.getEvents();
+        Set<String> eventIds = events.keySet();
+        for (String eventId : eventIds) {
+            IntVar var1 = varMap.get(events.get(eventId).getBegVar());
+            IntVar var2 = varMap.get(events.get(eventId).getEndVar());
+            eventSolutions.put(eventId, new TCSSolution(eventId, solution.getIntVal(var1), solution.getIntVal(var2)));
+        }
+
+
+        return eventSolutions ;
     }
 }

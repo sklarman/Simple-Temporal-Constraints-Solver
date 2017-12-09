@@ -9,7 +9,7 @@ public class TimeInterval {
 
     public TimeInterval() {
     }
-    
+
     public String getId() {
         return id;
     }
