@@ -24,7 +24,7 @@ class ChocoSolverTest {
             e.printStackTrace();
         }
 
-        TCSSolver solver = new ChocoSolver(problem.getConstraintSystem());
+        ChocoSolver solver = new ChocoSolver(problem.getConstraintSystem());
 
         assertTrue(solver.consistency());
     }
@@ -46,19 +46,19 @@ class ChocoSolverTest {
             e.printStackTrace();
         }
 
-        TCSSolver solver = new ChocoSolver(problem.getConstraintSystem());
+        ChocoSolver solver = new ChocoSolver(problem.getConstraintSystem());
 
         assertTrue(solver.consistency());
     }
 
     @Test
-    public void inConsistentProblem1() {
+    public void inconsistentProblem1() {
         List<Assertion> input = new ArrayList<Assertion>() {{
             add(new Assertion("http://test/interval","http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
             add(new Assertion("http://test/interval","http://www.w3.org/2006/time#hasBeginning", "http://test/instant1"));
             add(new Assertion("http://test/interval","http://www.w3.org/2006/time#hasEnd", "http://test/instant2"));
-            add(new Assertion("http://test/instant1","http://www.w3.org/2006/time#inXSDDate", "2017-01-01"));
-            add(new Assertion("http://test/instant2","http://www.w3.org/2006/time#inXSDDate", "2017-01-03"));
+            add(new Assertion("http://test/instant1","http://www.w3.org/2006/time#inXSDDateTime", "2017-01-01T12:00:00"));
+            add(new Assertion("http://test/instant2","http://www.w3.org/2006/time#inXSDDateTime", "2017-01-02T12:00:01"));
         }};
 
         TCSProblem problem = null;
@@ -68,13 +68,12 @@ class ChocoSolverTest {
             e.printStackTrace();
         }
 
-        TCSSolver solver = new ChocoSolver(problem.getConstraintSystem());
-
+        ChocoSolver solver = new ChocoSolver(problem.getConstraintSystem());
         assertTrue(!solver.consistency());
     }
 
     @Test
-    public void inConsistentProblem2() {
+    public void inconsistentProblem2() {
         List<Assertion> input = new ArrayList<Assertion>() {{
             add(new Assertion("http://test/interval1","http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
             add(new Assertion("http://test/interval1","http://www.w3.org/2006/time#after", "http://test/interval2"));
@@ -89,7 +88,7 @@ class ChocoSolverTest {
             e.printStackTrace();
         }
 
-        TCSSolver solver = new ChocoSolver(problem.getConstraintSystem());
+        ChocoSolver solver = new ChocoSolver(problem.getConstraintSystem());
 
         assertTrue(!solver.consistency());
     }

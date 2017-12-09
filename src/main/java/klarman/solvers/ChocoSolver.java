@@ -3,6 +3,7 @@ package klarman.solvers;
 import klarman.constraints.ConstraintSystem;
 import klarman.constraints.LinearConstraint;
 import org.chocosolver.solver.Model;
+import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.IntVar;
 import static klarman.constraints.ConstraintVocabulary.*;
@@ -73,9 +74,16 @@ public class ChocoSolver extends TCSSolver {
 
     @Override
     public boolean consistency() {
+        
+        Solver solver =  model.getSolver();
+        solver.reset();
+        return solver.solve();
+    }
+
+    public Solution exampleSolution() {
 
         Solver solver =  model.getSolver();
-
-        return solver.solve();
+        solver.reset();
+        return solver.findSolution();
     }
 }
