@@ -25,7 +25,7 @@ public class TimeInterval {
 
     public TimeInterval(String id) {
         this.id = id;
-        this.alias = "int_" + id.hashCode();
+        this.alias = "v" + id.hashCode();
         this.begVar = alias + "-";
         this.endVar = alias + "+";
     }

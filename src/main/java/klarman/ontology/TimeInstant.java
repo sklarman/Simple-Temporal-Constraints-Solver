@@ -1,6 +1,6 @@
 package klarman.ontology;
 
-public class TimeInstant {
+public class TimeInstant  {
 
     private String id;
     private String alias;
@@ -18,9 +18,17 @@ public class TimeInstant {
         return var;
     }
 
+    public String begVar() {
+        return var;
+    }
+
+    public String endVar() {
+        return var;
+    }
+
     public TimeInstant(String id) {
         this.id = id;
-        this.alias = "ins_" + id.hashCode();
+        this.alias = "v" + id.hashCode();
         this.var = alias;
     }
 
