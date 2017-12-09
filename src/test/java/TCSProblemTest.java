@@ -44,7 +44,7 @@ class TCSProblemTest {
 
 
         List<Assertion> input = new ArrayList<Assertion>() {{
-            add(new Assertion("http://test/interval1","http://www.w3.org/2006/klarman.time#hasXSDDuration", "P1D"));
+            add(new Assertion("http://test/interval1","http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
             add(new Assertion("http://test/event2","http://granthika.co/grantha/story#inTime", "http://test/interval3"));
         }};
 
