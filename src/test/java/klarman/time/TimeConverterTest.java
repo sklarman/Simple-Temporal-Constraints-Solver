@@ -1,9 +1,10 @@
+package klarman.time;
+
 import org.junit.jupiter.api.Test;
-import klarman.time.TimeConverter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TemporalDataConverterTest {
+class TimeConverterTest {
 
     @Test
     public void durationOfADayInHours() {

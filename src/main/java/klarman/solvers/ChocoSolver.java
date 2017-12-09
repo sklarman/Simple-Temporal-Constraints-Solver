@@ -40,20 +40,29 @@ public class ChocoSolver extends TCSSolver {
 
         for (String var : vars) {
             chocoVars[i] = model.intVar(var, IntVar.MIN_INT_BOUND, IntVar.MAX_INT_BOUND);
-            varMap.put(var, chocoVars[i]);
+            if (!var.equals("")) {
+                varMap.put(var, chocoVars[i]);
+            }
             i++;
         }
 
 
         for (LinearConstraint constraint : constraintSystem.getConstraints()) {
 
+            String var1 = constraint.getLhs().getVariable();
+            String var2 = constraint.getRhs().getVariable();
+            int const1 = (int) constraint.getLhs().getConstant();
+            int const2 = (int) constraint.getRhs().getConstant();
+
+            IntVar intVar1 = varMap.get(var1);
+            IntVar intVar2 = varMap.get(var2);
+
+//            model.arithm(intVar1, "+", intVar2, "<",).post();
+//            model.arithm(x, "<", y, "+", 5).post();
+//            model.arithm(x2, "<", x3).post();
+
 
         }
-
-
-//        model.arithm(x1, "<", x2).post();
-//        model.arithm(x2, "<", x3).post();
-//        model.arithm(x3, "<", x1).post();
 
     }
 
