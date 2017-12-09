@@ -5,6 +5,7 @@ import klarman.constraints.LinearConstraint;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.IntVar;
+import static klarman.constraints.ConstraintVocabulary.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +13,11 @@ import java.util.Set;
 
 public class ChocoSolver extends TCSSolver {
 
-    Model model;
-
-    Map<String, IntVar> varMap;
+    private Model model;
+    private Map<String, IntVar> varMap;
 
     public ChocoSolver(ConstraintSystem constraintSystem) {
+
 
         this.constraintSystem = constraintSystem;
         this.varMap = new HashMap<>();
@@ -27,6 +28,7 @@ public class ChocoSolver extends TCSSolver {
 
     //Choco requires imposes Integer bounds on the variable values.
     //This might lead to problems with input constants being of type long.
+    //It is recommended to keep the precision level on the level of days or hours when using this solver.
 
     private void convertToChoco() {
 
@@ -46,29 +48,27 @@ public class ChocoSolver extends TCSSolver {
             i++;
         }
 
-
         for (LinearConstraint constraint : constraintSystem.getConstraints()) {
 
             String var1 = constraint.getLhs().getVariable();
             String var2 = constraint.getRhs().getVariable();
+            String op = constraint.getOperator();
             int const1 = (int) constraint.getLhs().getConstant();
             int const2 = (int) constraint.getRhs().getConstant();
 
             IntVar intVar1 = varMap.get(var1);
             IntVar intVar2 = varMap.get(var2);
 
-//            model.arithm(intVar1, "+", intVar2, "<",).post();
-//            model.arithm(x, "<", y, "+", 5).post();
-//            model.arithm(x2, "<", x3).post();
-
-//            412008 <= ins_-1014269315
-//            int_-903589529- <= int_-903589529+
-//            int_-903589535- + 24 = int_-903589535+
-//            int_-903589530- = ins_-1014269313
-//            ins_-1014269317 <= 412032
-
+            if (intVar1!=null && intVar2!= null) {
+                model.arithm(intVar1, op, intVar2, "+", const2-const1).post();
+            }
+            if (intVar1!=null && intVar2== null) {
+                model.arithm(intVar1, op, const2-const1).post();
+            }
+            if (intVar1==null && intVar2!= null) {
+                model.arithm(intVar2, inv(op), const1-const2).post();
+            }
         }
-
     }
 
     @Override

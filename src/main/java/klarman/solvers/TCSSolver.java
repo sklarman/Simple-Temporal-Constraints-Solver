@@ -4,7 +4,7 @@ import klarman.constraints.ConstraintSystem;
 
 public abstract class TCSSolver {
 
-     ConstraintSystem constraintSystem = null;
+     protected ConstraintSystem constraintSystem;
 
      public abstract boolean consistency();
 
