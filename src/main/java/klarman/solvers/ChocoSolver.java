@@ -10,6 +10,7 @@ import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.IntVar;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,10 +19,14 @@ import static klarman.constraints.ConstraintVocabulary.inv;
 public class ChocoSolver extends TCSSolver {
 
     private Model model;
+    private Map<String, IntVar> varMap;
 
     public ChocoSolver(TCSProblem problem) {
 
         super(problem);
+
+        this.varMap = new HashMap<>();
+        
         convertToChoco();
 
     }
