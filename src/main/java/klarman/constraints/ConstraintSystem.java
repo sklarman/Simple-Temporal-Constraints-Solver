@@ -4,11 +4,11 @@ import klarman.ontology.TimeInterval;
 import java.util.HashSet;
 import java.util.Set;
 
-import static klarman.constraints.TCSConstraintVocabulary.LEQ;
+import static klarman.constraints.ConstraintVocabulary.LEQ;
 
-public class TCSConstraintSystem {
+public class ConstraintSystem {
 
-    public Set<TCSConstraint> getConstraints() {
+    public Set<Constraint> getConstraints() {
         return constraints;
     }
 
@@ -16,11 +16,11 @@ public class TCSConstraintSystem {
         return vars;
     }
 
-    private Set<TCSConstraint> constraints;
+    private Set<Constraint> constraints;
 
     private Set<String> vars;
 
-    public TCSConstraintSystem() {
+    public ConstraintSystem() {
 
         this.constraints = new HashSet<>();
         this.vars = new HashSet<>();
@@ -28,11 +28,11 @@ public class TCSConstraintSystem {
     }
 
     public void addConstraint(String lvar, long lconst, String operator, String rvar, long rconst) {
-        TCSExpression lhs = new TCSExpression(lvar, lconst);
-        TCSExpression rhs = new TCSExpression(rvar, rconst);
-        TCSConstraint constraint = new TCSConstraint(lhs, operator, rhs);
+        ConstraintExpression lhs = new ConstraintExpression(lvar, lconst);
+        ConstraintExpression rhs = new ConstraintExpression(rvar, rconst);
+        Constraint constraint = new Constraint(lhs, operator, rhs);
 
-        for (TCSConstraint existingConstraint : constraints) {
+        for (Constraint existingConstraint : constraints) {
             if (    existingConstraint.getLhs().getVariable().equals(lvar) &&
                     existingConstraint.getRhs().getVariable().equals(rvar) &&
                     existingConstraint.getLhs().getConstant()==lconst &&
@@ -53,7 +53,7 @@ public class TCSConstraintSystem {
     @Override
     public String toString() {
         String output = "";
-        for (TCSConstraint constriant : constraints) {
+        for (Constraint constriant : constraints) {
             output += constriant.toString() + "\n";
         }
         return output;
