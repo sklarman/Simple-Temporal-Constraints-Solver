@@ -26,7 +26,7 @@ public class ChocoSolver extends TCSSolver {
         super(problem);
 
         this.varMap = new HashMap<>();
-        
+
         convertToChoco();
 
     }
