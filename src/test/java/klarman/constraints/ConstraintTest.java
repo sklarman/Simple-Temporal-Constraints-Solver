@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static klarman.constraints.ConstraintVocabulary.LEQ;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinearConstraintTest {
+class ConstraintTest {
 
     ConstraintExpression lhs = new ConstraintExpression("x", 0);
     ConstraintExpression rhs = new ConstraintExpression("y", 1);
-    LinearConstraint constraint = new LinearConstraint(lhs, LEQ, rhs);
+    Constraint constraint = new Constraint(lhs, LEQ, rhs);
 
     @Test
     public void createConstraintTestContent1() {

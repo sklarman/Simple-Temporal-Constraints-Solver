@@ -1,4 +1,4 @@
-package klarman.constraints;
+package klarman;
 
 public class TCSSolution {
 
@@ -6,9 +6,7 @@ public class TCSSolution {
     private long begVar;
     private long endVar;
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
     public long getBegVar() {
         return begVar;

@@ -1,6 +1,6 @@
 package klarman.constraints;
 
-public class ConstraintExpression {
+public class TCSExpression {
 
     public String getVariable() {
         return variable;
@@ -15,7 +15,7 @@ public class ConstraintExpression {
 
     //TO BE READ AS: "variable + constant"
 
-    public ConstraintExpression(String variable, long constant) {
+    public TCSExpression(String variable, long constant) {
         this.variable = variable;
         this.constant = constant;
     }

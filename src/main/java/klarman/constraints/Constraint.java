@@ -1,12 +1,12 @@
 package klarman.constraints;
 
-public class LinearConstraint {
+public class TCSConstraint {
 
-    public ConstraintExpression getLhs() {
+    public TCSExpression getLhs() {
         return lhs;
     }
 
-    public ConstraintExpression getRhs() {
+    public TCSExpression getRhs() {
         return rhs;
     }
 
@@ -14,14 +14,14 @@ public class LinearConstraint {
         return operator;
     }
 
-    private ConstraintExpression lhs;
-    private ConstraintExpression rhs;
+    private TCSExpression lhs;
+    private TCSExpression rhs;
     private String operator;
 
     //TO BE READ AS: "(lhs) operator (rhs)"
 
 
-    public LinearConstraint(ConstraintExpression lhs, String operator, ConstraintExpression rhs) {
+    public TCSConstraint(TCSExpression lhs, String operator, TCSExpression rhs) {
         this.lhs = lhs;
         this.rhs = rhs;
         this.operator = operator;

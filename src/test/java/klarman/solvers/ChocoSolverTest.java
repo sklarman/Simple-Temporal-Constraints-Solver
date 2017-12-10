@@ -1,7 +1,7 @@
 package klarman.solvers;
 
 import klarman.TCSProblem;
-import klarman.constraints.TCSSolutionMap;
+import klarman.TCSSolutionMap;
 import klarman.ontology.Assertion;
 import org.junit.jupiter.api.Test;
 
@@ -124,7 +124,6 @@ class ChocoSolverTest {
         //System.out.println(problem.getConstraintSystem().toString());
 
         ChocoSolver solver = new ChocoSolver(problem);
-
         TCSSolutionMap solutionMap = solver.findSolution();
 
         //System.out.println(solutionMap.toString());

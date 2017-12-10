@@ -4,11 +4,11 @@ import klarman.ontology.TimeInterval;
 import java.util.HashSet;
 import java.util.Set;
 
-import static klarman.constraints.ConstraintVocabulary.LEQ;
+import static klarman.constraints.TCSConstraintVocabulary.LEQ;
 
-public class ConstraintSystem {
+public class TCSConstraintSystem {
 
-    public Set<LinearConstraint> getConstraints() {
+    public Set<TCSConstraint> getConstraints() {
         return constraints;
     }
 
@@ -16,11 +16,11 @@ public class ConstraintSystem {
         return vars;
     }
 
-    private Set<LinearConstraint> constraints;
+    private Set<TCSConstraint> constraints;
 
     private Set<String> vars;
 
-    public ConstraintSystem() {
+    public TCSConstraintSystem() {
 
         this.constraints = new HashSet<>();
         this.vars = new HashSet<>();
@@ -28,11 +28,11 @@ public class ConstraintSystem {
     }
 
     public void addConstraint(String lvar, long lconst, String operator, String rvar, long rconst) {
-        ConstraintExpression lhs = new ConstraintExpression(lvar, lconst);
-        ConstraintExpression rhs = new ConstraintExpression(rvar, rconst);
-        LinearConstraint constraint = new LinearConstraint(lhs, operator, rhs);
+        TCSExpression lhs = new TCSExpression(lvar, lconst);
+        TCSExpression rhs = new TCSExpression(rvar, rconst);
+        TCSConstraint constraint = new TCSConstraint(lhs, operator, rhs);
 
-        for (LinearConstraint existingConstraint : constraints) {
+        for (TCSConstraint existingConstraint : constraints) {
             if (    existingConstraint.getLhs().getVariable().equals(lvar) &&
                     existingConstraint.getRhs().getVariable().equals(rvar) &&
                     existingConstraint.getLhs().getConstant()==lconst &&
@@ -53,7 +53,7 @@ public class ConstraintSystem {
     @Override
     public String toString() {
         String output = "";
-        for (LinearConstraint constriant : constraints) {
+        for (TCSConstraint constriant : constraints) {
             output += constriant.toString() + "\n";
         }
         return output;

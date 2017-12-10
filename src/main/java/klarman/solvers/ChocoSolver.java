@@ -1,31 +1,27 @@
 package klarman.solvers;
 
 import klarman.TCSProblem;
-import klarman.constraints.LinearConstraint;
-import klarman.constraints.TCSSolutionMap;
-import klarman.constraints.TCSSolution;
+import klarman.constraints.Constraint;
+import klarman.TCSSolution;
+import klarman.TCSSolutionMap;
 import klarman.ontology.Event;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.IntVar;
-import static klarman.constraints.ConstraintVocabulary.*;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import static klarman.constraints.ConstraintVocabulary.inv;
 
 public class ChocoSolver extends TCSSolver {
 
     private Model model;
-    private Map<String, IntVar> varMap;
 
     public ChocoSolver(TCSProblem problem) {
 
-        this.constraintSystem = problem.getConstraintSystem();
-        this.ontology = problem.getOntology();
-        this.varMap = new HashMap<>();
-
+        super(problem);
         convertToChoco();
 
     }
@@ -52,7 +48,7 @@ public class ChocoSolver extends TCSSolver {
             i++;
         }
 
-        for (LinearConstraint constraint : constraintSystem.getConstraints()) {
+        for (Constraint constraint : constraintSystem.getConstraints()) {
 
             String var1 = constraint.getLhs().getVariable();
             String var2 = constraint.getRhs().getVariable();
