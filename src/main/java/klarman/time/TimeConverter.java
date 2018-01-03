@@ -3,8 +3,12 @@ package klarman.time;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.joda.time.format.ISOPeriodFormat;
+
+import javax.print.attribute.standard.MediaSize;
 
 public class TimeConverter {
 
@@ -20,11 +24,16 @@ public class TimeConverter {
     */
 
     private int precisionFactor;
+    private int precision;
 
-    public TimeConverter(int precision) { this.precisionFactor = getFactor(precision); }
+    public TimeConverter(int precision) {
+        this.precision = precision;
+        this.precisionFactor = getFactor(precision);
+    }
 
     public TimeConverter() {
-        this.precisionFactor = getFactor(3);
+        this.precision = 3;
+        this.precisionFactor = getFactor(this.precision);
     }
 
     private int getFactor(int precision) {
@@ -113,7 +122,7 @@ public class TimeConverter {
 
         //e.g. "2017-01-01"
 
-        DateTime date = DateTime.parse(xsdDate, ISODateTimeFormat.date());
+        DateTime date = DateTime.parse(xsdDate, ISODateTimeFormat.localDateOptionalTimeParser());
 
         return date.getMillis() / precisionFactor;
 
@@ -123,7 +132,7 @@ public class TimeConverter {
 
         //e.g. "2017-01-01"
 
-        DateTime date = DateTime.parse(xsdDate, ISODateTimeFormat.date());
+        DateTime date = DateTime.parse(xsdDate, ISODateTimeFormat.localDateOptionalTimeParser());
 
         return date.plusDays(1).getMillis() / precisionFactor;
 
@@ -146,6 +155,37 @@ public class TimeConverter {
         DateTime dateTime = DateTime.parse(xsdDateTime, ISODateTimeFormat.dateTimeParser());
 
         return dateTime.plusSeconds(1).getMillis() / precisionFactor;
+
+    }
+
+    public String getXSDDateTime(long numericTime) {
+
+        String epoch = "1970-01-01T00:00:00Z";
+
+        long millis = numericTime * precisionFactor;
+
+        DateTime zero = DateTime.parse(epoch, ISODateTimeFormat.dateTimeParser());
+
+        DateTime dateTime = zero.plus(millis);
+
+        String output = null;
+
+        if (this.precision==0) {
+
+            output = dateTime.toString();
+        }
+
+        if (this.precision>0&&this.precision<4) {
+
+            output = dateTime.toString(ISODateTimeFormat.dateTimeNoMillis());
+        }
+
+        if (this.precision==4) {
+
+            output = dateTime.toString(ISODateTimeFormat.date());
+        }
+
+        return output;
 
     }
 

@@ -1,5 +1,6 @@
 package klarman.time;
 
+import org.joda.time.DateTime;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,6 +22,15 @@ class TimeConverterTest {
         TimeConverter converter = new TimeConverter(4);
         long duration = converter.getDuration("P1D");
         assertEquals(1, (int) duration);
+
+    }
+
+    @Test
+    public void durationOfAnHourInMinutes() {
+
+        TimeConverter converter = new TimeConverter(2);
+        long duration = converter.getDuration("PT1H");
+        assertEquals(60, (int) duration);
 
     }
 
@@ -134,6 +144,42 @@ class TimeConverterTest {
         int diff = (int) (end - begin);
 
         assertEquals(1, diff);
+
+    }
+
+    @Test
+    public void getDateTimeByConversionToNumbersAndBackPrecision0() {
+
+        String dateTime = "2002-10-10T12:00:00.000+01:00";
+        TimeConverter converter = new TimeConverter(0);
+        long begin = converter.getDateTimeBeginning(dateTime);
+        String output = converter.getXSDDateTime(begin);
+
+        assert(dateTime.equals(output));
+
+    }
+
+    @Test
+    public void getDateTimeByConversionToNumbersAndBackPrecision1() {
+
+        String dateTime = "2002-10-10T12:00:00+01:00";
+        TimeConverter converter = new TimeConverter(1);
+        long begin = converter.getDateTimeBeginning(dateTime);
+        String output = converter.getXSDDateTime(begin);
+
+        assert(dateTime.equals(output));
+
+    }
+
+    @Test
+    public void getDateTimeByConversionToNumbersAndBackPrecision4() {
+
+        String date = "1970-01-02";
+        TimeConverter converter = new TimeConverter(4);
+        long begin = converter.getDateBeginning(date);
+        String output = converter.getXSDDateTime(begin);
+
+        assert(date.equals(output));
 
     }
 

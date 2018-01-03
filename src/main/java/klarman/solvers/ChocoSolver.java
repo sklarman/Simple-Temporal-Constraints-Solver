@@ -33,7 +33,7 @@ public class ChocoSolver extends TCSSolver {
 
     //Choco requires imposes Integer bounds on the variable values.
     //This might lead to problems with input constants being of type long.
-    //It is recommended to keep the precision level on the level of days or hours when using this solver.
+    //It is recommended to keep the precision level on the level of days or hours (i.e. 3-4) when using this solver.
 
     private void convertToChoco() {
 
@@ -97,7 +97,7 @@ public class ChocoSolver extends TCSSolver {
         for (String eventId : eventIds) {
             IntVar var1 = varMap.get(events.get(eventId).getBegVar());
             IntVar var2 = varMap.get(events.get(eventId).getEndVar());
-            eventSolutions.put(eventId, new TCSSolution(eventId, solution.getIntVal(var1), solution.getIntVal(var2)));
+            eventSolutions.put(eventId, new TCSSolution(eventId, solution.getIntVal(var1), solution.getIntVal(var2), this.converter));
         }
 
 

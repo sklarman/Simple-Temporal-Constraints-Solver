@@ -1,10 +1,14 @@
 package klarman;
 
+import klarman.time.TimeConverter;
+
 public class TCSSolution {
 
     private String id;
     private long begVar;
     private long endVar;
+    private String begVarXSD;
+    private String endVarXSD;
 
     public String getId() { return id; }
 
@@ -16,10 +20,20 @@ public class TCSSolution {
         return endVar;
     }
 
-    public TCSSolution(String id, long begVar, long endVar) {
+    public String getBegVarXSD() {
+        return begVarXSD;
+    }
+
+    public String getEndVarXSD() {
+        return endVarXSD;
+    }
+
+    public TCSSolution(String id, long begVar, long endVar, TimeConverter converter) {
         this.id = id;
         this.begVar = begVar;
         this.endVar = endVar;
+        this.begVarXSD = converter.getXSDDateTime(begVar);
+        this.endVarXSD = converter.getXSDDateTime(endVar);
     }
 
     @Override
@@ -28,6 +42,8 @@ public class TCSSolution {
                 "id='" + id + '\'' +
                 ", begVar=" + begVar +
                 ", endVar=" + endVar +
+                ", begVarXSD=" + begVarXSD +
+                ", endVarXSD=" + endVarXSD +
                 '}';
     }
 }

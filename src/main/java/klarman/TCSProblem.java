@@ -18,6 +18,10 @@ public class TCSProblem {
     private TimeConverter converter;
     private List<Assertion> input;
 
+    public TimeConverter getConverter() {
+        return converter;
+    }
+
     public ConstraintSystem getConstraintSystem() {
         return constraintSystem;
     }
