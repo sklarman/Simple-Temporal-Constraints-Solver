@@ -1,6 +1,5 @@
 package klarman;
 
-import klarman.TCSProblem;
 import klarman.ontology.Assertion;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +26,8 @@ class TCSProblemTest {
             add(new Assertion("http://test/interval7", "http://www.w3.org/2006/time#hasEnd", "http://test/instant6"));
             add(new Assertion("http://test/interval8", "http://www.w3.org/2006/time#before", "http://test/interval9"));
             add(new Assertion("http://test/interval10", "http://www.w3.org/2006/time#after", "http://test/interval11"));
+            add(new Assertion("http://test/interval12", "http://www.w3.org/2006/time#intervalMeets", "http://test/interval13"));
+            add(new Assertion("http://test/interval14", "http://www.w3.org/2006/time#intervalMetBy", "http://test/interval15"));
         }};
 
         TCSProblem problem = null;
@@ -39,7 +40,7 @@ class TCSProblemTest {
         //System.out.println(problem.getOntology().toString());
         //System.out.println(problem.getConstraintSystem().toString());
 
-        assertEquals(27, problem.getConstraintSystem().getConstraints().size());
+        assertEquals(33, problem.getConstraintSystem().getConstraints().size());
 
     }
 

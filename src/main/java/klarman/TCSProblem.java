@@ -110,6 +110,14 @@ public class TCSProblem {
                 extract_TIME_AFTER(assertion);
                 break;
             }
+            case TIME_INTERVAL_MEETS: {
+                extract_TIME_INTERVAL_MEETS(assertion);
+                break;
+            }
+            case TIME_INTERVAL_METBY: {
+                extract_TIME_INTERVAL_METBY(assertion);
+                break;
+            }
             default: {
                 throw new Exception("An unsupported predicate encountered: " + assertion.toString());
             }
@@ -239,6 +247,28 @@ public class TCSProblem {
         constraintSystem.addInterval(interval);
 
         constraintSystem.addConstraint(interval.getEndVar(), 0, EQ, instant.getVar(), 0);
+    }
+
+    private void extract_TIME_INTERVAL_MEETS(Assertion assertion) {
+        TimeInterval interval1 = ontology.addInterval(assertion.getSubject());
+        TimeInterval interval2 = ontology.addInterval(assertion.getObject());
+
+        constraintSystem.addInterval(interval1);
+        constraintSystem.addInterval(interval2);
+
+        constraintSystem.addConstraint(interval1.getEndVar(), 0, EQ, interval2.getBegVar(), 0);
+
+    }
+
+    private void extract_TIME_INTERVAL_METBY(Assertion assertion) {
+        TimeInterval interval1 = ontology.addInterval(assertion.getSubject());
+        TimeInterval interval2 = ontology.addInterval(assertion.getObject());
+
+        constraintSystem.addInterval(interval1);
+        constraintSystem.addInterval(interval2);
+
+        constraintSystem.addConstraint(interval2.getEndVar(), 0, EQ, interval1.getBegVar(), 0);
+
     }
 
 }

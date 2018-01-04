@@ -14,5 +14,7 @@ public final class OntologyVocabulary {
     public static final String TIME_END = "http://www.w3.org/2006/time#hasEnd";
     public static final String TIME_BEFORE = "http://www.w3.org/2006/time#before";
     public static final String TIME_AFTER = "http://www.w3.org/2006/time#after";
+    public static final String TIME_INTERVAL_MEETS = "http://www.w3.org/2006/time#intervalMeets";
+    public static final String TIME_INTERVAL_METBY = "http://www.w3.org/2006/time#intervalMetBy";
 
 }

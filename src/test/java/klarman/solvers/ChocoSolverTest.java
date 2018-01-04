@@ -3,13 +3,13 @@ package klarman.solvers;
 import klarman.TCSProblem;
 import klarman.TCSSolutionMap;
 import klarman.ontology.Assertion;
-import klarman.time.TimeConverter;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ChocoSolverTest {
 
@@ -160,7 +160,7 @@ class ChocoSolverTest {
     }
 
     @Test
-    public void findSolutionWithMissingDatesForConsistentProblem() {
+    public void findSolutionWithMissingDatesForConsistentProblem1() {
         List<Assertion> input = new ArrayList<Assertion>() {{
             add(new Assertion("http://test/event", "http://granthika.co/grantha/story#spansTime", "http://test/interval"));
             add(new Assertion("http://test/interval", "http://www.w3.org/2006/time#hasBeginning", "http://test/instant"));
@@ -182,6 +182,37 @@ class ChocoSolverTest {
 
         assert(solutionMap.get("http://test/event").getBegVarXSD().equals("2017-01-01"));
         assert(solutionMap.get("http://test/event").getEndVarXSD().equals("2017-01-02"));
+    }
+
+    @Test
+    public void findSolutionWithMissingDatesForConsistentProblem2() {
+        List<Assertion> input = new ArrayList<Assertion>() {{
+            add(new Assertion("http://test/event1", "http://granthika.co/grantha/story#spansTime", "http://test/interval1"));
+            add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#hasBeginning", "http://test/instant"));
+            add(new Assertion("http://test/instant", "http://www.w3.org/2006/time#inXSDDate", "2017-01-01"));
+            add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
+            add(new Assertion("http://test/event2", "http://granthika.co/grantha/story#spansTime", "http://test/interval2"));
+            add(new Assertion("http://test/interval2", "http://www.w3.org/2006/time#hasXSDDuration", "P1D"));
+           // add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#intervalMeets", "http://test/interval2"));
+            add(new Assertion("http://test/interval2", "http://www.w3.org/2006/time#intervalMetBy", "http://test/interval1"));
+        }};
+
+        TCSProblem problem = null;
+        try {
+            problem = new TCSProblem(input, 4);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ChocoSolver solver = new ChocoSolver(problem);
+        TCSSolutionMap solutionMap = solver.findSolution();
+
+        // System.out.println(solutionMap.toString());
+
+        assert(solutionMap.get("http://test/event1").getBegVarXSD().equals("2017-01-01"));
+        assert(solutionMap.get("http://test/event1").getEndVarXSD().equals("2017-01-02"));
+        assert(solutionMap.get("http://test/event2").getBegVarXSD().equals("2017-01-02"));
+        assert(solutionMap.get("http://test/event2").getEndVarXSD().equals("2017-01-03"));
     }
 
     @Test
