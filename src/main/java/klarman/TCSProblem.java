@@ -9,6 +9,7 @@ import java.util.List;
 
 import static klarman.constraints.ConstraintVocabulary.EQ;
 import static klarman.constraints.ConstraintVocabulary.LEQ;
+import static klarman.constraints.ConstraintVocabulary.LESS;
 import static klarman.ontology.OntologyVocabulary.*;
 
 public class TCSProblem {
@@ -217,7 +218,7 @@ public class TCSProblem {
         constraintSystem.addInterval(interval1);
         constraintSystem.addInterval(interval2);
 
-        constraintSystem.addConstraint(interval1.getEndVar(), 0, LEQ, interval2.getBegVar(), 0);
+        constraintSystem.addConstraint(interval1.getEndVar(), 0, LESS, interval2.getBegVar(), 0);
     }
 
     private void extract_TIME_AFTER(Assertion assertion) {
@@ -227,7 +228,7 @@ public class TCSProblem {
         constraintSystem.addInterval(interval1);
         constraintSystem.addInterval(interval2);
 
-        constraintSystem.addConstraint(interval2.getEndVar(), 0, LEQ, interval1.getBegVar(), 0);
+        constraintSystem.addConstraint(interval2.getEndVar(), 0, LESS, interval1.getBegVar(), 0);
 
     }
 
