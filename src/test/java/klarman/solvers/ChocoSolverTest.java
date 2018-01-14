@@ -138,7 +138,7 @@ class ChocoSolverTest {
             add(new Assertion("http://test/instant3", "http://www.w3.org/2006/time#inXSDDate", "1896-12-05"));
             add(new Assertion("http://test/interval2", "http://www.w3.org/2006/time#hasEnd", "http://test/instant4"));
             add(new Assertion("http://test/instant4", "http://www.w3.org/2006/time#inXSDDate", "1896-12-05"));
-            add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#after", "http://test/interval2"));
+            add(new Assertion("http://test/interval2", "http://www.w3.org/2006/time#before", "http://test/interval1"));
         }};
 
         TCSProblem problem = null;
