@@ -126,6 +126,36 @@ class ChocoSolverTest {
     }
 
     @Test
+    public void inconsistentProblem4() {
+        List<Assertion> input = new ArrayList<Assertion>() {{
+            add(new Assertion("http://test/event1", "http://granthika.co/grantha/story#spansTime", "http://test/interval1"));
+            add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#hasBeginning", "http://test/instant1"));
+            add(new Assertion("http://test/instant1", "http://www.w3.org/2006/time#inXSDDate", "1896-06-04"));
+            add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#hasEnd", "http://test/instant2"));
+            add(new Assertion("http://test/instant2", "http://www.w3.org/2006/time#inXSDDate", "1896-06-04"));
+            add(new Assertion("http://test/event2", "http://granthika.co/grantha/story#spansTime", "http://test/interval2"));
+            add(new Assertion("http://test/interval2", "http://www.w3.org/2006/time#hasBeginning", "http://test/instant3"));
+            add(new Assertion("http://test/instant3", "http://www.w3.org/2006/time#inXSDDate", "1896-12-05"));
+            add(new Assertion("http://test/interval2", "http://www.w3.org/2006/time#hasEnd", "http://test/instant4"));
+            add(new Assertion("http://test/instant4", "http://www.w3.org/2006/time#inXSDDate", "1896-12-05"));
+            add(new Assertion("http://test/interval1", "http://www.w3.org/2006/time#after", "http://test/interval2"));
+        }};
+
+        TCSProblem problem = null;
+        try {
+            problem = new TCSProblem(input, 3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println(problem.getOntology().toString());
+        //System.out.println(problem.getConstraintSystem().toString());
+
+        ChocoSolver solver = new ChocoSolver(problem);
+        assertTrue(!solver.consistency());
+    }
+
+    @Test
     public void findSolutionForConsistentProblem() {
         List<Assertion> input = new ArrayList<Assertion>() {{
             add(new Assertion("http://test/event", "http://granthika.co/grantha/story#spansTime", "http://test/interval"));
